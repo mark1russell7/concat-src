@@ -13,6 +13,6 @@
     "declarationMap": false,
     "types": ["node"]
   },
-  "include": ["src/**/*", "test/**/*"],
+  "include": ["concat-src.ts", "src/**/*", "test/**/*"],
   "exclude": ["node_modules", "site", "test/expected"]
 }

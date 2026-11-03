@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 import { CASES, makeFixture, withoutTime } from "./fixture.ts";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const cli = path.resolve(here, "../concat-src.js");
+const cli = path.resolve(here, "../concat-src.ts");
 
 for (const c of CASES) {
   test(`the CLI output of the case ${c.name} is the expected output`, () => {

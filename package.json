@@ -15,7 +15,7 @@
     "node": ">=22.18"
   },
   "bin": {
-    "concat-src": "./concat-src.js"
+    "concat-src": "./concat-src.ts"
   },
   "exports": {
     "./catalog": {
@@ -36,15 +36,5 @@
     "@mark1russell7/ste-lint": "^0.1.2",
     "@types/node": "^26.6.4",
     "typescript": "^7.0.2"
-  },
-  "conventions": {
-    "rules": {
-      "typed-scripts": {
-        "ignore": [
-          "concat-src.js"
-        ],
-        "reason": "The CLI entry stays JavaScript, so `node concat-src.js` starts it with no flag. It imports the typed module src/catalog.ts, which Node.js 22.18 and later runs with type stripping."
-      }
-    }
   }
 }
