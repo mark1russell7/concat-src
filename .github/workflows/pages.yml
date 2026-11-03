@@ -38,7 +38,7 @@ jobs:
       pages: write
       id-token: write
     with:
-      # The site is a Vite app in site/. It bundles src/catalog.js from the workspace, so the page runs the rules of the CLI.
+      # The site is a Vite app in site/. It bundles src/catalog.ts from the workspace, so the page runs the rules of the CLI.
       build: pnpm --filter @concat-src/site run build
       out: site/dist
       env: '{"SITE_BASE": "/${{ github.event.repository.name }}"}'

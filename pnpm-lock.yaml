@@ -169,9 +169,18 @@ importers:
       '@mark1russell7/conventions':
         specifier: ^0.24.0
         version: 0.24.0
+      '@mark1russell7/cue':
+        specifier: ^2.0.0
+        version: 2.0.0
       '@mark1russell7/ste-lint':
         specifier: ^0.1.2
         version: 0.1.2
+      '@types/node':
+        specifier: ^26.6.4
+        version: 26.6.6
+      typescript:
+        specifier: ^7.0.2
+        version: 7.0.2
 
   site:
     dependencies:

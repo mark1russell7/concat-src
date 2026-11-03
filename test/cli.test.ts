@@ -1,5 +1,5 @@
 // The CLI test: the CLI runs on the fixture folder, and its output must be byte-identical to the expected output.
-// The expected outputs in test/expected/ come from concat-src.js before the module src/catalog.js (commit 04195f0).
+// The expected outputs in test/expected/ come from concat-src.js before the module src/catalog (commit 04195f0).
 // Only the time of the line "Generated on" changes between runs, so the test replaces it.
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
@@ -7,7 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
-import { CASES, makeFixture, withoutTime } from "./fixture.js";
+import { CASES, makeFixture, withoutTime } from "./fixture.ts";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const cli = path.resolve(here, "../concat-src.js");

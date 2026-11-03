@@ -125,7 +125,7 @@
           <p>The output starts with the rules and a directory tree. Then it has a section for each kept file, with a code fence and the language of the extension.</p>
           <p>A code fence is longer than each run of backticks in the file, so a file with Markdown in it does not break the output.</p>
           <p class="hint">The directory tree also shows the folders with no kept files, and the hidden files that pass the other rules. The CLI did this before the site, and the site keeps it.</p>
-          <p class="hint">This page and the CLI use the same module, <a href="https://github.com/mark1russell7/concat-src/blob/main/src/catalog.js"><code>src/catalog.js</code></a>. Thus the page gives the output of the CLI, except the time in the line "Generated on".</p>
+          <p class="hint">This page and the CLI use the same module, <a href="https://github.com/mark1russell7/concat-src/blob/main/src/catalog.ts"><code>src/catalog.ts</code></a>. Thus the page gives the output of the CLI, except the time in the line "Generated on".</p>
         </div>
       </section>
 
@@ -158,7 +158,7 @@ node concat-src.js output.md --include=.ts --exclude=.test.ts</code></pre>
         </div>
         <div class="card install">
           <h3>Install</h3>
-          <p>The package is not on npm. Get the repository, and start the script with Node.js 22.12 or later. It needs no dependencies.</p>
+          <p>The package is not on npm. Get the repository, and start the script with Node.js 22.18 or later. It needs no dependencies.</p>
           <div class="codeblock">
             <pre class="scroll-cue"><code id="install-cmd">git clone https://github.com/mark1russell7/concat-src.git ~/concat-src
 cd path/to/your-project

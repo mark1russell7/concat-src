@@ -1,13 +1,11 @@
-// The tests of the module src/catalog.js: the reason of each file, the overrides and the parts of the Markdown.
+// The tests of the module src/catalog.ts: the reason of each file, the overrides and the parts of the Markdown.
 import assert from "node:assert/strict";
 import path from "node:path";
 import { test } from "node:test";
-import { buildCatalog, classify, extname, fenceFor, languageOf, parseList } from "../src/catalog.js";
-import { FIXTURE } from "./fixture.js";
+import { buildCatalog, classify, extname, fenceFor, languageOf, parseList, type SourceFile } from "../src/catalog.ts";
+import { FIXTURE } from "./fixture.ts";
 
-const files = Object.entries(FIXTURE)
-  .filter(([, text]) => text !== null)
-  .map(([p, text]) => ({ path: p, text }));
+const files: SourceFile[] = Object.entries(FIXTURE).flatMap(([p, text]) => (text === null ? [] : [{ path: p, text }]));
 
 test("extname is the extname of node:path", () => {
   for (const name of ["a.ts", ".env", ".eslintrc.cjs", "a.", ".", "..", "...", "..ts", "...ts", "a..b", "Makefile", "x.test.ts", ".a.b.", "..a."]) {
@@ -66,7 +64,7 @@ test("the fence is longer than each run of backticks, and the language comes fro
 });
 
 test("the catalog reads only the kept files", () => {
-  const read = [];
+  const read: string[] = [];
   const lazy = files.map((f) => ({ path: f.path, text: () => (read.push(f.path), String(f.text)) }));
   const catalog = buildCatalog(lazy, { generatedAt: "T" });
   assert.deepEqual(read.sort(), catalog.kept.map((k) => k.path).sort());

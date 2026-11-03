@@ -4,7 +4,7 @@ import os from "node:os";
 import path from "node:path";
 
 /** Each path of the fixture and its text. The value null makes an empty folder. */
-export const FIXTURE = {
+export const FIXTURE: Readonly<Record<string, string | null>> = {
   "a.ts": "export const a = 1;\n",
   "Z.ts": "export const z = 26;\n",
   "src/index.ts": 'export * from "./util/math";\nexport { App } from "./App";\n',
@@ -30,8 +30,14 @@ export const FIXTURE = {
   ".cache/cached.ts": "export const cached = true;\n",
 };
 
+/** A case of the CLI test: a name and the arguments. */
+export interface Case {
+  readonly name: string;
+  readonly args: readonly string[];
+}
+
 /** The cases of the CLI test: a name and the arguments. */
-export const CASES = [
+export const CASES: readonly Case[] = [
   { name: "default", args: [] },
   { name: "include-js", args: ["out.md", "--include=.ts,.tsx,.js"] },
   { name: "exclude", args: ["--exclude=.test.ts,.d.ts"] },
@@ -42,7 +48,7 @@ export const CASES = [
 ];
 
 /** This function writes the fixture into a new temporary folder and gives its path. */
-export function makeFixture() {
+export function makeFixture(): string {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "concat-src-"));
   for (const [rel, text] of Object.entries(FIXTURE)) {
     const full = path.join(root, ...rel.split("/"));
@@ -57,6 +63,6 @@ export function makeFixture() {
 }
 
 /** This function replaces the time of the line "Generated on", because it changes at each run. */
-export function withoutTime(markdown) {
+export function withoutTime(markdown: string): string {
   return markdown.replace(/^Generated on .*$/m, "Generated on <time>");
 }

@@ -9,12 +9,12 @@
 //   node concat-src.js output.md --exclude=.spec.ts,.test.ts
 //   node concat-src.js output.md --include=.ts --exclude=.test.ts
 //
-// The rules and the Markdown are in src/catalog.js. The site of the project uses the same module.
+// The rules and the Markdown are in src/catalog.ts. The site of the project uses the same module.
 
 import fs from "node:fs";
 import path from "node:path";
 import process from "node:process";
-import { buildCatalog, IGNORED_FOLDERS, parseList } from "./src/catalog.js";
+import { buildCatalog, IGNORED_FOLDERS, parseList } from "./src/catalog.ts";
 
 const root = process.cwd();
 const SRC_DIR = root;
