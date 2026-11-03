@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>concat-src: all the source files of a folder in one Markdown file</title>
+    <meta name="description" content="Walk a folder, keep the source files by extension and by end pattern, and write all of them into one Markdown file. Try the rules live on a sample project or on your own folder, in your browser." />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2317192a'/%3E%3Crect x='7' y='7' width='8' height='3' rx='1.5' fill='%2336c28f'/%3E%3Crect x='7' y='13' width='12' height='3' rx='1.5' fill='%2336c28f'/%3E%3Crect x='7' y='19' width='6' height='3' rx='1.5' fill='%23a597e8'/%3E%3Cpath d='M21 9v14l4-3' stroke='%2393abff' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+    <script>
+      // The saved theme applies before the first paint, so a dark page does not flash white.
+      try {
+        const t = localStorage.getItem("concat-src-theme");
+        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#try">Skip to the live catalog</a>
+    <header class="top">
+      <div class="brand">
+        <h1 class="wordmark"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>concat-src</h1>
+        <p class="lead">
+          Walk a folder, keep the source files, and write all of them into one Markdown file. Change the rules below and see the output change.
+          Or use your own folder: the files stay in your browser.
+        </p>
+      </div>
+      <nav class="links" aria-label="Site">
+        <a href="#try">Try it</a>
+        <a href="#how">How it works</a>
+        <a href="#cli">CLI</a>
+        <a href="releases/">Releases</a>
+        <a href="status/">Status</a>
+        <a href="https://github.com/mark1russell7/concat-src">GitHub</a>
+        <button type="button" class="theme" id="theme" aria-label="Color theme">Theme: auto</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="try" class="core" aria-labelledby="try-title">
+        <h2 id="try-title" class="sr">The live catalog</h2>
+
+        <div class="card rules" aria-labelledby="rules-title">
+          <h3 id="rules-title" class="card-title">Rules</h3>
+          <div class="field">
+            <label class="label" for="include">Include extensions <span class="hint">(<code>--include</code>)</span></label>
+            <input id="include" class="mono" type="text" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="include-hint" />
+            <div class="chips" id="include-chips" role="group" aria-label="Add or remove an extension"></div>
+            <p class="hint" id="include-hint">Separate the extensions with commas. An empty list gives the default <code>.ts, .tsx</code>.</p>
+          </div>
+          <div class="field">
+            <label class="label" for="exclude">Exclude name endings <span class="hint">(<code>--exclude</code>)</span></label>
+            <input id="exclude" class="mono" type="text" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="exclude-hint" />
+            <div class="chips" id="exclude-chips" role="group" aria-label="Add or remove a pattern"></div>
+            <p class="hint" id="exclude-hint">A file is out when its name ends with one of these patterns. An empty list excludes nothing.</p>
+          </div>
+          <div class="field">
+            <span class="label">The same with the CLI</span>
+            <div class="codeblock">
+              <pre class="scroll-cue"><code id="command"></code></pre>
+              <button type="button" class="copy" id="copy-command">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card files" aria-labelledby="files-title">
+          <div class="files-head">
+            <h3 id="files-title" class="card-title">Files <span class="hint" id="source-name"></span></h3>
+            <button type="button" id="reset-force" hidden>Undo my toggles</button>
+          </div>
+          <div class="bar" id="bar" role="img" aria-label="The files by reason"></div>
+          <div class="chips legend" id="legend" role="group" aria-label="Show the files of one reason"></div>
+          <p class="hint">Select a box to turn a file in or out, whatever the rules say.</p>
+          <ul class="file-list" id="file-list" aria-label="The files and why each one is in or out"></ul>
+          <p class="hint" id="list-more"></p>
+        </div>
+
+        <div class="card output" aria-labelledby="output-title">
+          <div class="output-head">
+            <h3 id="output-title" class="card-title">Output <code>src-catalog.md</code></h3>
+            <div class="buttons">
+              <button type="button" id="copy-output">Copy</button>
+              <button type="button" id="download" class="primary">Download</button>
+            </div>
+          </div>
+          <dl class="stats" aria-live="polite">
+            <div><dt>Files kept</dt><dd id="stat-kept"></dd></div>
+            <div><dt>Size</dt><dd id="stat-size"></dd></div>
+            <div><dt>Lines</dt><dd id="stat-lines"></dd></div>
+          </dl>
+          <pre class="markdown" id="output" tabindex="0" aria-label="The Markdown output"></pre>
+        </div>
+
+        <div class="card source" aria-labelledby="source-title">
+          <h3 id="source-title" class="card-title">Use your own folder</h3>
+          <div class="drop" id="drop">
+            <p><strong>Drop a folder here</strong>, or</p>
+            <div class="buttons">
+              <button type="button" id="pick" class="primary">Choose a folder</button>
+              <button type="button" id="use-sample">Use the sample again</button>
+            </div>
+            <input type="file" id="folder" class="sr" webkitdirectory multiple tabindex="-1" aria-hidden="true" />
+          </div>
+          <p class="hint privacy">
+            <strong>The files stay in your browser.</strong> The page sends nothing to a server. It reads only text files, and it stops at 5 MB. It does not read
+            the hidden folders and the ignored folders, because the CLI skips them too.
+          </p>
+          <p class="load-status" id="load-status" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section id="how" class="section" aria-labelledby="how-title">
+        <div class="section-head">
+          <h2 id="how-title">How it works</h2>
+          <p class="hint">The CLI walks the folder where you start it. It applies these rules to each entry, in this sequence. The first rule that applies decides.</p>
+        </div>
+        <ol class="rules-list">
+          <li><span class="tag r-hidden">hidden</span> <span>An entry with a name that starts with a dot is out. The walk does not enter a hidden folder.</span></li>
+          <li><span class="tag r-ignored">ignored folder</span> <span>The walk does not enter <code>node_modules</code>, <code>dist</code> and <code>build</code>, at each depth.</span></li>
+          <li><span class="tag r-extension">extension</span> <span>A file with an extension that is not in the include list is out. The default list is <code>.ts, .tsx</code>.</span></li>
+          <li><span class="tag r-excluded">exclude pattern</span> <span>A file with a name that ends with a pattern of the exclude list is out. For example, <code>.test.ts</code> removes the tests.</span></li>
+          <li><span class="tag r-kept">kept</span> <span>Each other file is kept. The output has the files in the sequence of their paths.</span></li>
+        </ol>
+        <div class="card explain">
+          <p>The output starts with the rules and a directory tree. Then it has a section for each kept file, with a code fence and the language of the extension.</p>
+          <p>A code fence is longer than each run of backticks in the file, so a file with Markdown in it does not break the output.</p>
+          <p class="hint">The directory tree also shows the folders with no kept files, and the hidden files that pass the other rules. The CLI did this before the site, and the site keeps it.</p>
+          <p class="hint">This page and the CLI use the same module, <a href="https://github.com/mark1russell7/concat-src/blob/main/src/catalog.ts"><code>src/catalog.ts</code></a>. Thus the page gives the output of the CLI, except the time in the line "Generated on".</p>
+        </div>
+      </section>
+
+      <section id="cli" class="section" aria-labelledby="cli-title">
+        <div class="section-head">
+          <h2 id="cli-title">The CLI</h2>
+          <p class="hint">Start it in the folder that you want in the catalog. It writes the output file into that folder.</p>
+        </div>
+        <div class="card">
+          <div class="codeblock">
+            <pre class="scroll-cue"><code id="usage">node concat-src.js [output.md] [--include=.ts,.tsx] [--exclude=.spec.ts,.test.ts]</code></pre>
+            <button type="button" class="copy" data-copy="usage">Copy</button>
+          </div>
+          <table class="opts">
+            <thead>
+              <tr><th scope="col">Argument</th><th scope="col">What it sets</th><th scope="col">Default</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>output.md</code></td><td>The name of the output file.</td><td><code>src-catalog.md</code></td></tr>
+              <tr><td><code>--include=</code></td><td>The extensions to keep, separated by commas.</td><td><code>.ts,.tsx</code></td></tr>
+              <tr><td><code>--exclude=</code></td><td>The name endings to remove, separated by commas.</td><td>none</td></tr>
+            </tbody>
+          </table>
+          <div class="codeblock">
+            <pre class="scroll-cue"><code id="examples">node concat-src.js output.md --include=.ts,.tsx,.js
+node concat-src.js output.md --exclude=.spec.ts,.test.ts
+node concat-src.js output.md --include=.ts --exclude=.test.ts</code></pre>
+            <button type="button" class="copy" data-copy="examples">Copy</button>
+          </div>
+        </div>
+        <div class="card install">
+          <h3>Install</h3>
+          <p>The package is not on npm. Get the repository, and start the script with Node.js 22.18 or later. It needs no dependencies.</p>
+          <div class="codeblock">
+            <pre class="scroll-cue"><code id="install-cmd">git clone https://github.com/mark1russell7/concat-src.git ~/concat-src
+cd path/to/your-project
+node ~/concat-src/concat-src.js --exclude=.test.ts</code></pre>
+            <button type="button" class="copy" data-copy="install-cmd">Copy</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p>MIT license. <a href="https://github.com/mark1russell7/concat-src">github.com/mark1russell7/concat-src</a> · <span id="build"></span></p>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

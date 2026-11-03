@@ -1,1 +1,10 @@
+node_modules/
+coverage/
+*.log
+.DS_Store
+.vscode/
+.idea/
 src-catalog.md
+
+# The build of the site. The Pages workflow builds it.
+site/dist/

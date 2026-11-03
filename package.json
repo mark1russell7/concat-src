@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json.schemastore.org/package",
+  "name": "concat-src",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Walk a folder, keep the source files by extension and by end pattern, and write all of them into one Markdown file.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mark1russell7/concat-src.git"
+  },
+  "type": "module",
+  "packageManager": "pnpm@12.10.1",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "bin": {
+    "concat-src": "./concat-src.js"
+  },
+  "exports": {
+    "./catalog": {
+      "types": "./src/catalog.ts",
+      "default": "./src/catalog.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json && pnpm --filter @concat-src/site run typecheck",
+    "test": "node --test \"test/*.test.ts\" && pnpm --filter @concat-src/site run test",
+    "lint:ste": "ste-lint",
+    "check:conventions": "conventions check"
+  },
+  "devDependencies": {
+    "@mark1russell7/conventions": "^0.24.0",
+    "@mark1russell7/cue": "^2.0.0",
+    "@mark1russell7/ste-lint": "^0.1.2",
+    "@types/node": "^26.6.4",
+    "typescript": "^7.0.2"
+  },
+  "conventions": {
+    "rules": {
+      "typed-scripts": {
+        "ignore": [
+          "concat-src.js"
+        ],
+        "reason": "The CLI entry stays JavaScript, so `node concat-src.js` starts it with no flag. It imports the typed module src/catalog.ts, which Node.js 22.18 and later runs with type stripping."
+      }
+    }
+  }
+}
