@@ -1,0 +1,3 @@
+* text=auto eol=lf
+# The expected outputs of the CLI test keep their bytes: one fixture file has CRLF line ends.
+test/expected/** -text

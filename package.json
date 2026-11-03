@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json.schemastore.org/package",
+  "name": "concat-src",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Walk a folder, keep the source files by extension and by end pattern, and write all of them into one Markdown file.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mark1russell7/concat-src.git"
+  },
+  "type": "module",
+  "packageManager": "pnpm@12.10.1",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "bin": {
+    "concat-src": "./concat-src.js"
+  },
+  "exports": {
+    "./catalog": {
+      "types": "./src/catalog.d.ts",
+      "default": "./src/catalog.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "typecheck": "pnpm --filter @concat-src/site run typecheck",
+    "test": "node --test \"test/*.test.js\" && pnpm --filter @concat-src/site run test",
+    "lint:ste": "ste-lint",
+    "check:conventions": "conventions check"
+  },
+  "devDependencies": {
+    "@mark1russell7/conventions": "^0.24.0",
+    "@mark1russell7/ste-lint": "^0.1.2"
+  },
+  "conventions": {
+    "rules": {
+      "typed-scripts": {
+        "ignore": [
+          "concat-src.js",
+          "src/catalog.js",
+          "test/*.js"
+        ],
+        "reason": "The CLI starts with plain node on Node.js 22.12 and later, with no build step and no type stripping. src/catalog.d.ts types the module, and the typecheck of the site reads those types. The tests are JavaScript for the same reason: node --test starts them on each Node.js version of the matrix."
+      }
+    }
+  }
+}
