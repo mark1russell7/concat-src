@@ -65,7 +65,7 @@ export function cliCommand(include: readonly string[] | null, exclude: readonly 
     const value = `--${name}=${list.join(",")}`;
     return /^[\w.,=@+/-]*$/.test(value) ? value : `"${value.replace(/(["\\$`])/g, "\\$1")}"`;
   };
-  return ["node concat-src.js", include ? arg("include", include) : "", exclude ? arg("exclude", exclude) : ""].filter(Boolean).join(" ");
+  return ["node concat-src.ts", include ? arg("include", include) : "", exclude ? arg("exclude", exclude) : ""].filter(Boolean).join(" ");
 }
 
 /** This function gives a size in bytes as text: 1536 gives "1.5 KB". */
