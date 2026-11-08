@@ -43,8 +43,8 @@ describe("the words of the page", () => {
 
   it("formats a size", () => {
     expect(formatBytes(512)).toBe("512 B");
-    expect(formatBytes(1536)).toBe("1.5 KB");
-    expect(formatBytes(5 * 1024 * 1024)).toBe("5.00 MB");
+    expect(formatBytes(1536)).toBe("1.5 KiB");
+    expect(formatBytes(5 * 1024 * 1024)).toBe("5 MiB");
   });
 });
 
