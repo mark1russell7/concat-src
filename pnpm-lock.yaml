@@ -184,6 +184,9 @@ importers:
 
   site:
     dependencies:
+      '@mark1russell7/quantity':
+        specifier: ^0.3.1
+        version: 0.3.1
       '@mark1russell7/site-pages':
         specifier: ^0.3.4
         version: 0.3.4
@@ -228,6 +231,19 @@ packages:
     resolution: {integrity: sha512-0/L9nQwGqUTCLTnUPtYKJ/cvXTr/gJWFWASUzGUjKyj3LxNpYgAplLuTPNQe0g4kjcM+9JAb/D/IfYwBGvM/mA==}
     engines: {node: '>=22'}
     hasBin: true
+
+  '@mark1russell7/quantity@0.3.1':
+    resolution: {integrity: sha512-b8nbUk0BaZJXOfUGzSs18kNgaQ7KquDP2DRREw8D4p8YywpRmjp1Bv4bX5+AjdPDqdn109PBfRYTZ3Ibt8mvNQ==}
+    engines: {node: '>=22.19'}
+    peerDependencies:
+      zod: ^4.1.0
+    peerDependenciesMeta:
+      zod:
+        optional: true
+
+  '@mark1russell7/rational@0.1.2':
+    resolution: {integrity: sha512-hn2C5jjOFCGKJqFQPHt57C/Cn1l9Lb9MltVNtL71KSu+nRrfPOmg8ujYB5n3oDFFWNdNA4bE/8LLT4tG3lmrGA==}
+    engines: {node: '>=22'}
 
   '@mark1russell7/rigor-generators@0.1.5':
     resolution: {integrity: sha512-YkABrG6+AV4oZKWoSIayDGxKTqcTMbp/eGa+3u00X09Jv9TfpHFDeqHlEQARMBzJ/kvy/EMNIXQZMGa3Nobuzw==}
@@ -775,6 +791,12 @@ snapshots:
       yaml: 2.9.1
 
   '@mark1russell7/cue@2.1.1': {}
+
+  '@mark1russell7/quantity@0.3.1':
+    dependencies:
+      '@mark1russell7/rational': 0.1.2
+
+  '@mark1russell7/rational@0.1.2': {}
 
   '@mark1russell7/rigor-generators@0.1.5': {}
 

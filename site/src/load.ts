@@ -4,7 +4,7 @@
  */
 import { classify, type Rules, type SourceFile } from "concat-src/catalog";
 
-/** The cap on the total size of the text that the page reads: 5 MB. */
+/** The cap on the total size of the text that the page reads: 5 MiB. */
 export const CAP_BYTES = 5 * 1024 * 1024;
 
 /** A file that the browser gave, before the page reads it. */
