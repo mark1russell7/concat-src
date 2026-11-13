@@ -1,4 +1,5 @@
 /** The words of the page for the reasons of the module, and the small formats of the page. */
+import { BYTES_1024, formatOnScale, quantity } from "@mark1russell7/quantity";
 import { parseList, type FileResult, type Reason, type ReasonCode } from "concat-src/catalog";
 
 /** A group of the file list: a reason of the rules, or a toggle of the visitor. */
@@ -65,12 +66,13 @@ export function cliCommand(include: readonly string[] | null, exclude: readonly 
     const value = `--${name}=${list.join(",")}`;
     return /^[\w.,=@+/-]*$/.test(value) ? value : `"${value.replace(/(["\\$`])/g, "\\$1")}"`;
   };
-  return ["node concat-src.js", include ? arg("include", include) : "", exclude ? arg("exclude", exclude) : ""].filter(Boolean).join(" ");
+  return ["node concat-src.ts", include ? arg("include", include) : "", exclude ? arg("exclude", exclude) : ""].filter(Boolean).join(" ");
 }
 
-/** This function gives a size in bytes as text: 1536 gives "1.5 KB". */
+/**
+ * This function gives a size in bytes as text, on the scale `BYTES_1024` of `@mark1russell7/quantity`: 1536 gives
+ * "1.5 KiB", and 5,242,880 gives "5 MiB".
+ */
 export function formatBytes(n: number): string {
-  if (n < 1024) return `${n} B`;
-  if (n < 1024 * 1024) return `${(n / 1024).toFixed(1)} KB`;
-  return `${(n / 1024 / 1024).toFixed(2)} MB`;
+  return formatOnScale(quantity(n, "B"), BYTES_1024);
 }

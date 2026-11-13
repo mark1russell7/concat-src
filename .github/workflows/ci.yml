@@ -5,17 +5,24 @@ name: CI
 
 on:
   push:
+    branches: [main]
   pull_request:
+  # A person starts a run on a branch with no pull request: gh workflow run ci.yml --ref <branch>
+  workflow_dispatch:
 
 permissions: {}
 
 concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
+  group: ci-${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+defaults:
+  run:
+    shell: bash
 
 jobs:
   ci:
-    uses: mark1russell7/template/.github/workflows/reusable-ci.yml@21c4cb628bc2e0e1be5b21fa92fd3c688400ecab # main
+    uses: mark1russell7/template/.github/workflows/reusable-ci.yml@4466542421ef76bcb3ccf5b5e1765d4f509f8f4f # main
     permissions:
       contents: read
     with:
@@ -25,7 +32,7 @@ jobs:
   # It passes only when each job of needs passed, or was skipped by its own if and ALLOW_SKIP names it.
   ci-ok:
     name: CI OK
-    if: always()
+    if: ${{ !cancelled() }}
     needs: [ci]
     runs-on: ubuntu-latest
     timeout-minutes: 2

@@ -28,10 +28,10 @@ describe("the words of the page", () => {
   });
 
   it("writes the CLI command, with quotes when a value has a space", () => {
-    expect(cliCommand([".ts", ".js"], null)).toBe("node concat-src.js --include=.ts,.js");
-    expect(cliCommand(null, [".test.ts"])).toBe("node concat-src.js --exclude=.test.ts");
-    expect(cliCommand(null, null)).toBe("node concat-src.js");
-    expect(cliCommand([".a b"], null)).toBe('node concat-src.js "--include=.a b"');
+    expect(cliCommand([".ts", ".js"], null)).toBe("node concat-src.ts --include=.ts,.js");
+    expect(cliCommand(null, [".test.ts"])).toBe("node concat-src.ts --exclude=.test.ts");
+    expect(cliCommand(null, null)).toBe("node concat-src.ts");
+    expect(cliCommand([".a b"], null)).toBe('node concat-src.ts "--include=.a b"');
   });
 
   it("tells a toggle of the visitor and the reason of the rules", () => {
@@ -43,8 +43,8 @@ describe("the words of the page", () => {
 
   it("formats a size", () => {
     expect(formatBytes(512)).toBe("512 B");
-    expect(formatBytes(1536)).toBe("1.5 KB");
-    expect(formatBytes(5 * 1024 * 1024)).toBe("5.00 MB");
+    expect(formatBytes(1536)).toBe("1.5 KiB");
+    expect(formatBytes(5 * 1024 * 1024)).toBe("5 MiB");
   });
 });
 

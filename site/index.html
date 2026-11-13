@@ -7,13 +7,6 @@
     <meta name="description" content="Walk a folder, keep the source files by extension and by end pattern, and write all of them into one Markdown file. Try the rules live on a sample project or on your own folder, in your browser." />
     <meta name="color-scheme" content="light dark" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2317192a'/%3E%3Crect x='7' y='7' width='8' height='3' rx='1.5' fill='%2336c28f'/%3E%3Crect x='7' y='13' width='12' height='3' rx='1.5' fill='%2336c28f'/%3E%3Crect x='7' y='19' width='6' height='3' rx='1.5' fill='%23a597e8'/%3E%3Cpath d='M21 9v14l4-3' stroke='%2393abff' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
-    <script>
-      // The saved theme applies before the first paint, so a dark page does not flash white.
-      try {
-        const t = localStorage.getItem("concat-src-theme");
-        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
-      } catch {}
-    </script>
   </head>
   <body>
     <a class="skip" href="#try">Skip to the live catalog</a>
@@ -102,7 +95,7 @@
             <input type="file" id="folder" class="sr" webkitdirectory multiple tabindex="-1" aria-hidden="true" />
           </div>
           <p class="hint privacy">
-            <strong>The files stay in your browser.</strong> The page sends nothing to a server. It reads only text files, and it stops at 5 MB. It does not read
+            <strong>The files stay in your browser.</strong> The page sends nothing to a server. It reads only text files, and it stops at 5 MiB. It does not read
             the hidden folders and the ignored folders, because the CLI skips them too.
           </p>
           <p class="load-status" id="load-status" role="status" aria-live="polite"></p>
@@ -136,7 +129,7 @@
         </div>
         <div class="card">
           <div class="codeblock">
-            <pre class="scroll-cue"><code id="usage">node concat-src.js [output.md] [--include=.ts,.tsx] [--exclude=.spec.ts,.test.ts]</code></pre>
+            <pre class="scroll-cue"><code id="usage">node concat-src.ts [output.md] [--include=.ts,.tsx] [--exclude=.spec.ts,.test.ts]</code></pre>
             <button type="button" class="copy" data-copy="usage">Copy</button>
           </div>
           <table class="opts">
@@ -150,9 +143,9 @@
             </tbody>
           </table>
           <div class="codeblock">
-            <pre class="scroll-cue"><code id="examples">node concat-src.js output.md --include=.ts,.tsx,.js
-node concat-src.js output.md --exclude=.spec.ts,.test.ts
-node concat-src.js output.md --include=.ts --exclude=.test.ts</code></pre>
+            <pre class="scroll-cue"><code id="examples">node concat-src.ts output.md --include=.ts,.tsx,.js
+node concat-src.ts output.md --exclude=.spec.ts,.test.ts
+node concat-src.ts output.md --include=.ts --exclude=.test.ts</code></pre>
             <button type="button" class="copy" data-copy="examples">Copy</button>
           </div>
         </div>
@@ -162,7 +155,7 @@ node concat-src.js output.md --include=.ts --exclude=.test.ts</code></pre>
           <div class="codeblock">
             <pre class="scroll-cue"><code id="install-cmd">git clone https://github.com/mark1russell7/concat-src.git ~/concat-src
 cd path/to/your-project
-node ~/concat-src/concat-src.js --exclude=.test.ts</code></pre>
+node ~/concat-src/concat-src.ts --exclude=.test.ts</code></pre>
             <button type="button" class="copy" data-copy="install-cmd">Copy</button>
           </div>
         </div>

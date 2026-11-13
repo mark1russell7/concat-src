@@ -47,7 +47,7 @@ export interface CatalogOptions extends Rules {
   readonly dirs?: readonly string[];
   /** The files that the user turned in or out, whatever the rules say. */
   readonly force?: Readonly<Record<string, "in" | "out">>;
-  /** The time in the line "Generated on". The default is now. */
+  /** The time in the line "Generated on". The default is the current time. */
   readonly generatedAt?: string;
   /** The path separator of the sort. The default is "/". */
   readonly sep?: string;
@@ -102,7 +102,7 @@ const LANGUAGES: Readonly<Record<string, string>> = {
   ".md": "markdown",
 };
 
-/** This function splits a list such as ".ts, .tsx" at each comma, as the CLI options do. */
+/** This function splits a list, for example ".ts, .tsx", at each comma, as the CLI options do. */
 export function parseList(text: string): string[] {
   return text.split(",").map((e) => e.trim());
 }
@@ -144,7 +144,7 @@ export function normalizeRules(rules: Rules = {}): NormalizedRules {
  * 2. a file in node_modules, dist or build is out,
  * 3. a file with an extension that is not in the include list is out,
  * 4. a file name that ends with a pattern of the exclude list is out,
- * 5. each other file is kept.
+ * 5. the catalog keeps each other file.
  * The result also tells if the directory tree of the catalog shows the file. The tree does not apply the first rule.
  */
 export function classify(path: string, rules: Rules = {}): Classified {

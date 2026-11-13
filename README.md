@@ -11,13 +11,13 @@ The package is not on npm. Get the repository, and start the script with Node.js
 ```sh
 git clone https://github.com/mark1russell7/concat-src.git ~/concat-src
 cd path/to/your-project
-node ~/concat-src/concat-src.js --exclude=.test.ts
+node ~/concat-src/concat-src.ts --exclude=.test.ts
 ```
 
 ## Usage
 
 ```sh
-node concat-src.js [output.md] [--include=.ts,.tsx] [--exclude=.spec.ts,.test.ts]
+node concat-src.ts [output.md] [--include=.ts,.tsx] [--exclude=.spec.ts,.test.ts]
 ```
 
 | Argument | What it sets | Default |
@@ -41,7 +41,7 @@ The output has the rules, a directory tree, and a section with a code fence for 
 ## The code
 
 - `src/catalog.ts` has the rules and the Markdown, with no file system. The CLI and the site use it.
-- `concat-src.js` is the CLI. It reads the folder and writes the output of the module.
+- `concat-src.ts` is the CLI. It reads the folder and writes the output of the module.
 - `test/` has the tests. The CLI test starts the CLI on a fixture folder, and compares the output with `test/expected/`.
 - `site/` is the site of GitHub Pages.
 
