@@ -10,7 +10,7 @@
     "url": "git+https://github.com/mark1russell7/concat-src.git"
   },
   "type": "module",
-  "packageManager": "pnpm@12.10.1",
+  "packageManager": "pnpm@12.18.0",
   "engines": {
     "node": ">=22.18"
   },
