@@ -176,8 +176,8 @@ importers:
   .:
     devDependencies:
       '@mark1russell7/conventions':
-        specifier: ^0.49.0
-        version: 0.49.3
+        specifier: ^0.50.7
+        version: 0.50.7
       '@mark1russell7/cue':
         specifier: ^2.0.0
         version: 2.1.4
@@ -201,7 +201,7 @@ importers:
         version: 0.4.3
       '@mark1russell7/site-pages':
         specifier: ^0.8.0
-        version: 0.8.1
+        version: 0.8.2
       concat-src:
         specifier: workspace:*
         version: link:..
@@ -264,8 +264,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@mark1russell7/conventions@0.49.3':
-    resolution: {integrity: sha512-jUATwa6VDq38uQMl5dskeXthQKnmCgmWSDx1rNcgcdrpUfeYDb8qDTDUQ47zhROotxUo8dwyG78rFeCIW/DiEQ==}
+  '@mark1russell7/conventions@0.50.7':
+    resolution: {integrity: sha512-1tx4G5JETCH+sccyKiNXi9rVviMEnFJS3RNpPnwI5/3Cp2DFKkyGZCKJpEh+uXJ5BSli5NrgWAV0lWTOnKWHSQ==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -299,8 +299,8 @@ packages:
     resolution: {integrity: sha512-0L075rT+toD6edxEwDdZHiFzHP4+dJrI64Pw5gh9V33VwCfNRUMQY90AooDpMgVcC9cuxHNXegDLSOYU9ZMIlA==}
     engines: {node: '>=22'}
 
-  '@mark1russell7/site-pages@0.8.1':
-    resolution: {integrity: sha512-R8lPPyDNAbemR2YBrivAIYkXNfQgJDUhggKiUGWHNEZTKwUpLtVGvl/lqD/bkhoSh9IluAhnz5c/5R/A/uFeVA==}
+  '@mark1russell7/site-pages@0.8.2':
+    resolution: {integrity: sha512-WMErq1NBREuaBOn28Vg+7LMJSTou8+O27qNRoaRt11h+r3j9muf4jFmuwGazDOSS+Cf32gxDT1/IpXbAz2h/Vg==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -915,7 +915,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@mark1russell7/conventions@0.49.3':
+  '@mark1russell7/conventions@0.50.7':
     dependencies:
       '@mark1russell7/text': 0.0.17
       yaml: 2.9.1
@@ -936,7 +936,7 @@ snapshots:
     dependencies:
       '@mark1russell7/rigor-generators': 0.1.16
 
-  '@mark1russell7/site-pages@0.8.1':
+  '@mark1russell7/site-pages@0.8.2':
     dependencies:
       '@mark1russell7/rigor-statistics': 0.2.4
 
