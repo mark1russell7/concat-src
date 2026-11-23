@@ -198,7 +198,7 @@ importers:
     dependencies:
       '@mark1russell7/quantity':
         specifier: ^0.4.0
-        version: 0.4.3
+        version: 0.4.4
       '@mark1russell7/site-pages':
         specifier: ^0.8.0
         version: 0.8.2
@@ -278,8 +278,8 @@ packages:
     resolution: {integrity: sha512-Pb978ZnvlAxzcdWtRtqTGb7mZFCvlNrdKnpZqhxQ7gafzeNGf1JqYFuB4RWiLbJzRuFUWjEoAVG5f2TndCIlSg==}
     engines: {node: '>=22'}
 
-  '@mark1russell7/quantity@0.4.3':
-    resolution: {integrity: sha512-XtD9tiGDit51uR5ATtCHarXCfAS6004slKst+AGcAPVxd1wcIpi+OVlsxb/PIkkr2NOFL/oG3QCF0kdEWHhu/w==}
+  '@mark1russell7/quantity@0.4.4':
+    resolution: {integrity: sha512-gDAAYNqx/HeeOUF5AE0JHUoxZiMctwZZTcdE/q080lZMfCGRjTdy21bY29ZZjeTg7mK5IjVK/ls3bVdMbL408w==}
     engines: {node: '>=22.19'}
     peerDependencies:
       zod: ^4.1.0
@@ -924,7 +924,7 @@ snapshots:
 
   '@mark1russell7/files@0.0.4': {}
 
-  '@mark1russell7/quantity@0.4.3':
+  '@mark1russell7/quantity@0.4.4':
     dependencies:
       '@mark1russell7/rational': 0.1.2
 
